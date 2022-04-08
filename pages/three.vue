@@ -12,28 +12,13 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import * as THREE from 'three'
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
-
-interface ringSettings {
-  depth: number,
-  bevelEnabled: boolean,
-  steps: number,
-  curveSegments: number
-}
-
 export default {
   name: 'HomeView',
   components: {},
-  data(): {
-    height: number,
-    renderer: any,
-    scene: any,
-    camera: any,
-    mesh: any,
-    controls: any
-  } {
+  data(){
     return {
       height: 2,
       renderer: null,
@@ -49,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ringSettings(): ringSettings {
+    ringSettings() {
       return {
         depth : +this.height,
         bevelEnabled: false,
@@ -59,7 +44,7 @@ export default {
     }
   },
   methods: {
-    render(): void {
+    render() {
       this.scene.remove(this.mesh);
       this.mesh = new THREE.Mesh(
         this.getRingGeometry(this.ringSettings),
@@ -70,7 +55,7 @@ export default {
       this.scene.add(this.mesh);
       this.renderer.render(this.scene, this.camera);
     },
-    getRingGeometry(ringSettings: ringSettings) {
+    getRingGeometry(ringSettings) {
       const outerRadius = 10;
       const innerRadius = 9;
 
@@ -109,7 +94,7 @@ export default {
       requestAnimationFrame(animate);
       this.controls.update();
     }
-    const view: HTMLCanvasElement = this.$refs.view as HTMLCanvasElement
+    const view = this.$refs.view
     this.renderer = new THREE.WebGLRenderer({
       canvas: view,
       antialias: true,
@@ -131,7 +116,7 @@ export default {
       this.getRingGeometry(this.ringSettings),
       new THREE.MeshPhongMaterial({
         color: "#fffb8a"
-      })  
+      })
     );
     this.scene.add(this.mesh);
 
