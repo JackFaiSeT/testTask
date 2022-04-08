@@ -1,7 +1,7 @@
 <template>
   <div class="metamask-wrapper">
     <template v-if="isMetamaskSupported">
-      <arch-button v-if="!isLoggedIn" textButton="Подключить" @click.native="connectWallet" />
+      <arch-button v-if="!isLoggedIn" textButton="Metamask" @click.native="connectWallet" />
       <p v-else>Подключен кошелек: {{address}}</p>
     </template>
     <template v-else>
